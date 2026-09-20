@@ -1,0 +1,41 @@
+# data/prices.yaml — Precios y parámetros económicos del modelo POL
+#
+# Datos puros de negocio, leídos por sim/economics.py (nunca hardcodeados).
+# Cambiar cualquier valor aquí actualiza el panel económico sin tocar código
+# (Requirement 11.5). Estructura conforme a design §10.1 (Modelo económico).
+#
+# Monedas: unidades monetarias (USD). Porcentajes como fracción (0.08 = 8%).
+
+# --- CAPEX: costo unitario de los componentes de la arquitectura POL ---
+capex:
+  olt_chasis: 45000        # chasis OLT de cabecera
+  tarjeta_pon: 12000       # tarjeta de línea PON (por tarjeta)
+  ont: 85                  # ONT (equipo terminal por servicio)
+  splitter_1x32: 120       # splitter óptico pasivo 1:32
+  fibra_por_metro: 2.5     # fibra óptica de distribución (por metro)
+
+# --- OPEX anual: costo operativo recurrente por año ---
+opex_anual:
+  energia_por_olt: 3200    # energía eléctrica por OLT/año
+  mantenimiento_pct: 0.08  # mantenimiento como % del CAPEX/año
+  soporte: 15000           # contrato de soporte/año
+
+# --- Horizonte de análisis (años) para el cálculo de TCO ---
+horizonte_anios: 10
+
+# --- Comparativa contra arquitectura tradicional de cobre ---
+comparativa_cobre:
+  switch_acceso: 3500              # switch de acceso de cobre
+  cableado_utp_por_puerto: 45      # cableado UTP por puerto
+  energia_por_switch: 900          # energía por switch/año
+
+# --- Propuesta de valor (Requirement 10): supuestos de dimensionamiento ---
+# NO son precios monetarios; son parámetros de derivación inventario -> cifras
+# físicas (puertos, cuartos, kW). Editables aquí para actualizar la vista de
+# Propuesta de valor sin tocar código (Req 11.5). Consumidos por
+# sim/economics.py -> propuesta_valor(). Valores por defecto documentados en el
+# código; si se omite una clave se usa ese valor por defecto conservador.
+propuesta_valor:
+  switches_por_cuarto: 4           # switches de acceso de cobre por cuarto de telecom
+  watts_por_switch_cobre: 250      # consumo eléctrico de un switch de acceso (W)
+  watts_por_olt: 600               # consumo eléctrico de un chasis OLT POL (W)

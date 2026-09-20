@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600"
+     role="img" aria-label="Mapa de planta del estadio dividido en zonas">
+  <title>Mapa de planta del estadio por zonas</title>
+  <desc>
+    Planta esquemática de un estadio dividida en zonas identificables. Cada zona es
+    un elemento con id y atributo data-zona más una etiqueta legible. Los rellenos son
+    neutros (placeholder): la vista de Negocio recolorea cada zona por su estado agregado
+    usando los tokens de tema (en_linea, degradado, fuera, reserva). No se hardcodean
+    colores de estado aquí.
+  </desc>
+
+  <!-- Definiciones: patrón para el canal adicional al color (criticidad sin depender del color) -->
+  <defs>
+    <pattern id="patron-critico" patternUnits="userSpaceOnUse" width="8" height="8"
+             patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- Estilos base neutrales; la vista recolorea vía fill inline o clases de estado -->
+  <style>
+    .zona {
+      fill: #2b2f38;          /* relleno neutro placeholder */
+      stroke: #30363d;
+      stroke-width: 2;
+      cursor: pointer;
+    }
+    .zona:hover { stroke: #4a90d9; stroke-width: 3; }
+    .etiqueta {
+      fill: #e6edf3;
+      font-family: "Inter", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
+    }
+    .etiqueta-sm { font-size: 11px; font-weight: 500; }
+  </style>
+
+  <!-- Fondo del recinto -->
+  <rect x="0" y="0" width="800" height="600" fill="#0d1117"/>
+  <rect x="20" y="20" width="760" height="560" rx="40" ry="40"
+        fill="#161b22" stroke="#30363d" stroke-width="2"/>
+
+  <!-- ===================== TRIBUNAS (anillo exterior) ===================== -->
+
+  <!-- Tribuna Norte (arriba) -->
+  <path id="zona-tribuna-norte" class="zona" data-zona="tribuna_norte"
+        d="M 60 60 L 740 60 L 640 160 L 160 160 Z">
+    <title>Tribuna Norte</title>
+  </path>
+  <text class="etiqueta" x="400" y="105">Tribuna Norte</text>
+
+  <!-- Tribuna Sur (abajo) -->
+  <path id="zona-tribuna-sur" class="zona" data-zona="tribuna_sur"
+        d="M 160 440 L 640 440 L 740 540 L 60 540 Z">
+    <title>Tribuna Sur</title>
+  </path>
+  <text class="etiqueta" x="400" y="495">Tribuna Sur</text>
+
+  <!-- Tribuna Poniente (izquierda) -->
+  <path id="zona-tribuna-poniente" class="zona" data-zona="tribuna_poniente"
+        d="M 60 60 L 160 160 L 160 440 L 60 540 Z">
+    <title>Tribuna Poniente</title>
+  </path>
+  <text class="etiqueta" x="105" y="300" transform="rotate(-90 105 300)">Tribuna Poniente</text>
+
+  <!-- Tribuna Oriente (derecha) -->
+  <path id="zona-tribuna-oriente" class="zona" data-zona="tribuna_oriente"
+        d="M 740 60 L 740 540 L 640 440 L 640 160 Z">
+    <title>Tribuna Oriente</title>
+  </path>
+  <text class="etiqueta" x="695" y="300" transform="rotate(90 695 300)">Tribuna Oriente</text>
+
+  <!-- ===================== PALCOS (esquinas) ===================== -->
+
+  <rect id="zona-palcos-nororiente" class="zona" data-zona="palcos_nororiente"
+        x="560" y="175" width="120" height="60" rx="6">
+    <title>Palcos Nororiente</title>
+  </rect>
+  <text class="etiqueta etiqueta-sm" x="620" y="205">Palcos NE</text>
+
+  <rect id="zona-palcos-norponiente" class="zona" data-zona="palcos_norponiente"
+        x="120" y="175" width="120" height="60" rx="6">
+    <title>Palcos Norponiente</title>
+  </rect>
+  <text class="etiqueta etiqueta-sm" x="180" y="205">Palcos NO</text>
+
+  <!-- ===================== PRENSA ===================== -->
+  <rect id="zona-prensa" class="zona" data-zona="prensa"
+        x="330" y="175" width="140" height="55" rx="6">
+    <title>Prensa</title>
+  </rect>
+  <text class="etiqueta etiqueta-sm" x="400" y="202">Prensa</text>
+
+  <!-- ===================== CANCHA (centro) ===================== -->
+  <rect id="zona-cancha" class="zona" data-zona="cancha"
+        x="250" y="250" width="300" height="180" rx="10"
+        style="fill:#20362a;">
+    <title>Cancha</title>
+  </rect>
+  <line x1="400" y1="250" x2="400" y2="430" stroke="#3a5a45" stroke-width="2"/>
+  <circle cx="400" cy="340" r="30" fill="none" stroke="#3a5a45" stroke-width="2"/>
+  <text class="etiqueta" x="400" y="340">Cancha</text>
+
+  <!-- ===================== ACCESOS (puertas) ===================== -->
+  <rect id="zona-acceso-norte" class="zona" data-zona="acceso_norte"
+        x="360" y="45" width="80" height="24" rx="4">
+    <title>Acceso Norte</title>
+  </rect>
+  <text class="etiqueta etiqueta-sm" x="400" y="57">Acceso N</text>
+
+  <rect id="zona-acceso-sur" class="zona" data-zona="acceso_sur"
+        x="360" y="531" width="80" height="24" rx="4">
+    <title>Acceso Sur</title>
+  </rect>
+  <text class="etiqueta etiqueta-sm" x="400" y="543">Acceso S</text>
+
+  <rect id="zona-acceso-poniente" class="zona" data-zona="acceso_poniente"
+        x="36" y="288" width="24" height="80" rx="4">
+    <title>Acceso Poniente</title>
+  </rect>
+
+  <rect id="zona-acceso-oriente" class="zona" data-zona="acceso_oriente"
+        x="740" y="288" width="24" height="80" rx="4">
+    <title>Acceso Oriente</title>
+  </rect>
+
+  <!-- ===================== SALA DE COMANDO / OLT ===================== -->
+  <rect id="zona-sala-olt" class="zona" data-zona="sala_olt"
+        x="260" y="440" width="130" height="45" rx="6">
+    <title>Sala OLT / Comando</title>
+  </rect>
+  <text class="etiqueta etiqueta-sm" x="325" y="462">Sala OLT</text>
+
+  <!-- ===================== ESTACIONAMIENTO / EXTERIOR ===================== -->
+  <rect id="zona-estacionamiento" class="zona" data-zona="estacionamiento"
+        x="410" y="440" width="130" height="45" rx="6">
+    <title>Estacionamiento</title>
+  </rect>
+  <text class="etiqueta etiqueta-sm" x="475" y="462">Estac.</text>
+</svg>

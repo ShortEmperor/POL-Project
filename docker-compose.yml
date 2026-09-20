@@ -1,0 +1,13 @@
+services:
+  pol-command-center:
+    build: .
+    ports:
+      - "8050:8050"
+    environment:
+      POL_ENV: "demo"
+      POL_TICK_MS: "1000"
+      POL_SEED: "42"
+    volumes:
+      - ./data:/app/data:ro
+      - ./tools:/app/tools:ro
+    restart: unless-stopped
